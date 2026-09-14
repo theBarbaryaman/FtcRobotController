@@ -20,7 +20,7 @@ public class Lodo {
     // CAMERA_FORWARD_OFFSET: positive = camera is forward of the odometry center.
     // CAMERA_LATERAL_OFFSET: positive = camera is left of the odometry center.
     // MEASURE THESE on your robot and update — currently 0.0 placeholders.
-    private static final double CAMERA_FORWARD_OFFSET = 21;
+    private static final double CAMERA_FORWARD_OFFSET = 22.5;
     private static final double CAMERA_LATERAL_OFFSET = 0.0;
 
     public String getLastStatus() {
@@ -78,7 +78,7 @@ public class Lodo {
             delta_y = delta_x * Math.tan(-(tx / 180.0) * Math.PI);
 
             // account for the camera not being physically at the robot's odometry center
-            double totalForward = delta_x + CAMERA_FORWARD_OFFSET;
+            double totalForward = delta_x - CAMERA_FORWARD_OFFSET;
             double totalLateral = delta_y + CAMERA_LATERAL_OFFSET;
 
             // adjust for angle
@@ -87,7 +87,7 @@ public class Lodo {
             double yB = y0 + totalForward * Math.sin(theta) + totalLateral * Math.cos(theta);
 
 
-            double heading = Math.atan2(totalLateral, totalForward) + theta;
+            double heading = Math.atan2(delta_y, delta_x) + theta;
             return new double[]{xB, yB, Math.toDegrees(heading)};
         }
     }
