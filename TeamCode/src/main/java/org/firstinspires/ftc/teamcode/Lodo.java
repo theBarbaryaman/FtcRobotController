@@ -27,6 +27,7 @@ public class Lodo {
         return lastStatus;
     }
 
+
     public double[] getBall(double[] roboCoords, HardwareMap hardwareMap){
         /* roboCoords is the length three array showing the coordinates on the odometry plane
         (in cm) and the angle theta from the x-axis counter-clockwise

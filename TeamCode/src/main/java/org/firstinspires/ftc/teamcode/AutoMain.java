@@ -30,6 +30,7 @@ public class AutoMain extends LinearOpMode {
         COLLECTING   // arrived at ball, running control transfer + outtake for a fixed duration
     }
 
+
     private State state = State.SEARCHING;
     private long collectStartTime = 0;
 
