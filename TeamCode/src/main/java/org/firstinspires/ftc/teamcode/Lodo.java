@@ -69,7 +69,7 @@ public class Lodo {
             lastStatus = "valid: tx=" + tx + " ty=" + ty;
 
             // calculate forward ground distance to target (cm).
-            // Per diagram: angle at camera = (69 - ty) degrees, between vertical
+            // Per diagram: angle at camera = (69 + ty) degrees, between vertical
             // side h (adjacent) and the hypotenuse; delta_x (opposite) is the
             // ground distance. tan(angle) = delta_x / h  =>  delta_x = h * tan(angle)
             double angleRad = ((69.0 + ty) / 180.0) * Math.PI;
@@ -79,7 +79,7 @@ public class Lodo {
             delta_y = delta_x * Math.tan(-(tx / 180.0) * Math.PI);
 
             // account for the camera not being physically at the robot's odometry center
-            double totalForward = delta_x - CAMERA_FORWARD_OFFSET;
+            double totalForward = delta_x + CAMERA_FORWARD_OFFSET;
             double totalLateral = delta_y + CAMERA_LATERAL_OFFSET;
 
             // adjust for angle
@@ -88,7 +88,7 @@ public class Lodo {
             double yB = y0 + totalForward * Math.sin(theta) + totalLateral * Math.cos(theta);
 
 
-            double heading = Math.atan2(delta_y, delta_x) + theta;
+            double heading = Math.atan2(totalLateral,totalForward) + theta;
             return new double[]{xB, yB, Math.toDegrees(heading)};
         }
     }
