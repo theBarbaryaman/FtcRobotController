@@ -122,7 +122,7 @@ public class AutoMain extends LinearOpMode {
             if (ballpos != null && ballpos.length != 0) {
                 ballPose = new Pose(ballpos[0], ballpos[1], Math.toRadians(ballpos[2]));
                 telemetry.addData("Current Position:", "(x,y,h): (%.2f,%.2f,%.2f)", currPose.getX(), currPose.getY(), Math.toDegrees(currPose.getHeading()));
-                telemetry.addData("Ball Position:", "(x,y): (%.2f,%.2f)",ballpos[0], ballpos[1]);
+                telemetry.addData("Ball Position:", "(x, y): (%.2f,%.2f)",ballpos[0], ballpos[1]);
                 telemetry.update();
 
                 double dx = ballPose.getX() - currPose.getX();
@@ -147,9 +147,10 @@ public class AutoMain extends LinearOpMode {
                             )
                             .build();
 
-                    follower.followPath(path, true);
-
-                    intake_motor.setVelocity(INTAKE_TICKS_PER_SEC);
+                    intaker.takeIn(435);
+                    telemetry.addData("On:", "true");
+                    follower.followPath(triangle, true);
+                    intaker.stopTake();
                 }
             } else {
                 control_motor.setVelocity(0);
