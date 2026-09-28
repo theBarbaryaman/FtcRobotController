@@ -149,7 +149,7 @@ public class AutoMain extends LinearOpMode {
 
                     intaker.takeIn(435);
                     telemetry.addData("On:", "true");
-                    follower.followPath(triangle, true);
+                    follower.followPath(path, true);
                     intaker.stopTake();
                 }
             } else {

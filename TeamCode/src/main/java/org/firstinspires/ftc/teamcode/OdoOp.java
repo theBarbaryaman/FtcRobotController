@@ -27,6 +27,8 @@ public class OdoOp extends LinearOpMode {
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(new Pose(0, 0, 0));
 
+        Tuning.initPoseHistory();
+
         telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
         telemetry.setMsTransmissionInterval(50);
 
@@ -38,7 +40,7 @@ public class OdoOp extends LinearOpMode {
             follower.update();
             drawCurrentAndHistory();
 
-            ballPose = new Pose(27.0, 0.0, 0.0);
+            ballPose = new Pose(67.5, 0.0, 0.0);
             currPose = follower.getPose();
 
             //telemetry.addData("Go To (x,y,h)", "(%.2f,%.2f,%.2f)",67.5, 0.0, 0.0);
